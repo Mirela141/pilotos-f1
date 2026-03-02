@@ -1,1 +1,848 @@
-//mirela
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lewis Hamilton | Legado & Velocidade</title>
+    <!-- Font Awesome 5 (CDN) para ícones -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #0a0c0f;
+            color: #f0f3f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* container padrão */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Cores da Mercedes - Verde Petróleo/Turquesa */
+        :root {
+            --mercedes: #00D2BE;
+            --mercedes-glow: rgba(0, 210, 190, 0.3);
+            --mercedes-dark: #008C7E;
+        }
+
+        /* Animações */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 var(--mercedes-glow); }
+            70% { box-shadow: 0 0 20px 10px var(--mercedes-glow); }
+            100% { box-shadow: 0 0 0 0 var(--mercedes-glow); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes rotateIn {
+            from { transform: rotate(-10deg) scale(0.9); opacity: 0; }
+            to { transform: rotate(0) scale(1); opacity: 1; }
+        }
+
+        /* === HEADER / HERO === */
+        .hero {
+            background: linear-gradient(135deg, #1e1e1e 0%, #000000 80%);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--mercedes);
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--mercedes-glow) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            opacity: 0.1;
+        }
+
+        .hero::after {
+            content: "44";
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            font-size: 15rem;
+            font-weight: 900;
+            color: rgba(0, 210, 190, 0.05);
+            line-height: 1;
+            pointer-events: none;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 85vh;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-content {
+            flex: 1 1 500px;
+            padding-right: 2rem;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        .hero-content .tag {
+            background: var(--mercedes);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #0a0c0f;
+            border-radius: 30px;
+            margin-bottom: 1.2rem;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 0%, var(--mercedes) 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px var(--mercedes-glow);
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--mercedes);
+            padding-left: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.1);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--mercedes);
+            line-height: 1.2;
+            text-shadow: 0 0 20px var(--mercedes-glow);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
+        .hero-image {
+            flex: 1 1 400px;
+            text-align: center;
+            filter: drop-shadow(0 20px 25px -5px rgba(0,0,0,0.8));
+            animation: float 6s ease-in-out infinite, rotateIn 1s ease-out;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 3px solid var(--mercedes);
+            box-shadow: 0 25px 40px -12px var(--mercedes-glow);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 50px -10px var(--mercedes);
+        }
+
+        /* === SEÇÃO BIO === */
+        .bio-section {
+            background: linear-gradient(135deg, #111417 0%, #1a1f25 100%);
+            padding: 5rem 0;
+            border-top: 1px solid var(--mercedes-dark);
+            border-bottom: 1px solid var(--mercedes-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, var(--mercedes-glow) 0%, transparent 50%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .bio-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bio-text {
+            flex: 2 1 500px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .bio-text h3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            color: var(--mercedes);
+        }
+
+        .bio-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--mercedes);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--mercedes);
+        }
+
+        .bio-text p {
+            font-size: 1.15rem;
+            color: #b0b5bc;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .bio-text p:hover {
+            transform: translateX(10px);
+            color: #fff;
+        }
+
+        .bio-quote {
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--mercedes);
+            margin: 2rem 0 1rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--mercedes);
+            text-shadow: 0 0 10px var(--mercedes-glow);
+        }
+
+        .bio-highlights {
+            flex: 1 1 250px;
+            background: rgba(0, 210, 190, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 210, 190, 0.2);
+            border: 1px solid var(--mercedes);
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .bio-highlights ul {
+            list-style: none;
+        }
+
+        .bio-highlights li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .bio-highlights li:hover {
+            transform: translateX(10px);
+        }
+
+        .bio-highlights i {
+            color: var(--mercedes);
+            font-size: 1.8rem;
+            width: 40px;
+            text-align: center;
+            filter: drop-shadow(0 0 5px var(--mercedes));
+        }
+
+        /* === CONQUISTAS === */
+        .achievements {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #0f1115 0%, #151a20 100%);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .section-title span {
+            color: var(--mercedes);
+            border-bottom: 3px solid var(--mercedes);
+            padding-bottom: 8px;
+            text-shadow: 0 0 20px var(--mercedes-glow);
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(26, 29, 34, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 2rem 2rem 1.8rem;
+            flex: 1 1 220px;
+            min-width: 200px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid var(--mercedes-dark);
+            animation: float 5s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+
+        .card:nth-child(1) { --i: 1; }
+        .card:nth-child(2) { --i: 2; }
+        .card:nth-child(3) { --i: 3; }
+        .card:nth-child(4) { --i: 4; }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--mercedes);
+            box-shadow: 0 20px 30px -10px var(--mercedes);
+            background: rgba(26, 29, 34, 0.95);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--mercedes);
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--mercedes));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card h4 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #999;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Carreira em números (mini tabela) */
+        .numbers-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            border: 1px solid var(--mercedes);
+            animation: pulse-glow 3s infinite;
+        }
+
+        .numbers-grid div {
+            text-align: center;
+            min-width: 100px;
+            transition: transform 0.3s;
+        }
+
+        .numbers-grid div:hover {
+            transform: scale(1.2);
+        }
+
+        .numbers-grid .big {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--mercedes);
+            text-shadow: 0 0 20px var(--mercedes);
+        }
+
+        .numbers-grid .small {
+            font-size: 0.9rem;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        /* === ATIVISMO & LEGADO === */
+        .legacy {
+            background: linear-gradient(135deg, #11171f 0%, #0f1419 100%);
+            padding: 5rem 0;
+            border-top: 1px solid var(--mercedes-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legacy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .legacy-item {
+            flex: 1 1 280px;
+            background: rgba(30, 36, 43, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 30px -10px black;
+            border: 1px solid var(--mercedes-dark);
+            transition: all 0.4s;
+            animation: float 6s ease-in-out infinite;
+            animation-delay: calc(var(--j) * 0.3s);
+        }
+
+        .legacy-item:nth-child(1) { --j: 1; }
+        .legacy-item:nth-child(2) { --j: 2; }
+        .legacy-item:nth-child(3) { --j: 3; }
+
+        .legacy-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--mercedes);
+            box-shadow: 0 30px 40px -15px var(--mercedes);
+            background: rgba(30, 36, 43, 0.95);
+        }
+
+        .legacy-item i {
+            font-size: 2.8rem;
+            color: var(--mercedes);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 15px var(--mercedes));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .legacy-item h4 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--mercedes);
+        }
+
+        .legacy-item p {
+            color: #b5bcc7;
+        }
+
+        /* === TIMELINE SIMPLES === */
+        .timeline {
+            background: linear-gradient(135deg, #0a0c0f 0%, #111417 100%);
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+            border-left: 3px solid var(--mercedes);
+            padding-left: 2rem;
+            transition: all 0.3s;
+            animation: slideIn 1s ease-out;
+            animation-delay: calc(var(--k) * 0.2s);
+        }
+
+        .timeline-item:nth-child(1) { --k: 1; }
+        .timeline-item:nth-child(2) { --k: 2; }
+        .timeline-item:nth-child(3) { --k: 3; }
+        .timeline-item:nth-child(4) { --k: 4; }
+        .timeline-item:nth-child(5) { --k: 5; }
+
+        .timeline-item:hover {
+            transform: translateX(15px);
+            border-left-color: #fff;
+            background: rgba(0, 210, 190, 0.05);
+            border-radius: 0 15px 15px 0;
+        }
+
+        .year {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--mercedes);
+            min-width: 100px;
+            text-shadow: 0 0 15px var(--mercedes);
+        }
+
+        .timeline-content h5 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--mercedes);
+        }
+
+        .timeline-content p {
+            color: #9aa3af;
+        }
+
+        /* === CTA / CONTATO (simulado) === */
+        .cta {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1a1e24, #0d0f13);
+            text-align: center;
+            border-top: 3px solid var(--mercedes);
+            border-bottom: 3px solid var(--mercedes);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--mercedes-glow) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+            opacity: 0.1;
+        }
+
+        .cta h3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--mercedes);
+            text-shadow: 0 0 20px var(--mercedes);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .cta .button {
+            display: inline-block;
+            background: var(--mercedes);
+            color: #0a0c0f;
+            font-weight: 700;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            margin-top: 2rem;
+            transition: all 0.4s;
+            border: 2px solid var(--mercedes);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta .button:hover {
+            background: transparent;
+            color: var(--mercedes);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--mercedes);
+        }
+
+        .cta .button:hover::before {
+            left: 100%;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #060709;
+            padding: 2.5rem 0;
+            color: #666;
+            text-align: center;
+            border-top: 1px solid var(--mercedes-dark);
+        }
+
+        footer .social a {
+            color: #888;
+            margin: 0 0.8rem;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        footer .social a:hover {
+            color: var(--mercedes);
+            transform: translateY(-5px) scale(1.2);
+            text-shadow: 0 0 20px var(--mercedes);
+        }
+
+        /* responsividade */
+        @media (max-width: 800px) {
+            .hero-content h1 { font-size: 3rem; }
+            .hero-grid { flex-direction: column; text-align: center; }
+            .hero-content { padding-right: 0; }
+            .hero-stats { justify-content: center; }
+            .bio-quote { font-size: 1.2rem; }
+            .numbers-grid .big { font-size: 2rem; }
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 0 1.2rem; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO / TOPO -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="tag">#44  •  Sir Lewis Hamilton</span>
+                <h1>Além da Velocidade</h1>
+                <h2>7 vezes campeão mundial de Fórmula 1</h2>
+                <p>Piloto, ativista, ícone. Redefinindo os limites dentro e fora das pistas.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Títulos Mundiais</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">103+</span>
+                        <span class="stat-label">Vitórias</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">104</span>
+                        <span class="stat-label">Pole Positions</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Imagem real do Lewis Hamilton -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016.jpg" alt="Lewis Hamilton">
+            </div>
+        </div>
+    </section>
+
+    <!-- BIO + DESTAQUES -->
+    <section class="bio-section">
+        <div class="container bio-grid">
+            <div class="bio-text">
+                <h3>Um piloto, uma lenda</h3>
+                <p>Lewis Hamilton nasceu em Stevenage, Inglaterra, 1985. Estreou na Fórmula 1 em 2007 pela McLaren e, já no ano seguinte, conquistou seu primeiro título mundial. Em 2013, iniciou uma parceria histórica com a Mercedes, que renderia mais seis campeonatos e incontáveis recordes.</p>
+                <p>Dono de um estilo agressivo e preciso, Hamilton ultrapassou os limites do automobilismo, tornando-se o piloto com mais poles positions, mais vitórias em corridas (ao lado de Schumacher) e o primeiro negro a dominar a modalidade.</p>
+                <div class="bio-quote">
+                    “Still I Rise” — ainda assim, eu me levanto.
+                </div>
+                <p>Fora das pistas, é voz ativa na luta contra o racismo, na defesa do meio ambiente e na promoção da diversidade no esporte.</p>
+            </div>
+            <div class="bio-highlights">
+                <ul>
+                    <li><i class="fas fa-trophy"></i> <strong>7x F1 World Champion</strong> (2008, 2014, 2015, 2017, 2018, 2019, 2020)</li>
+                    <li><i class="fas fa-flag-checkered"></i> <strong>103+ vitórias</strong> (recorde compartilhado)</li>
+                    <li><i class="fas fa-crown"></i> <strong>104 poles</strong> (recorde absoluto)</li>
+                    <li><i class="fas fa-star"></i> <strong>197 pódios</strong> (recorde)</li>
+                    <li><i class="fas fa-leaf"></i> Ativismo ambiental e vegano convicto</li>
+                    <li><i class="fas fa-gem"></i> Knight Bachelor (Sir) desde 2021</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONQUISTAS (cards) -->
+    <section class="achievements">
+        <div class="container">
+            <h2 class="section-title"><span>Conquistas</span> que marcam época</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h4>2008</h4>
+                    <p>campeão mais jovem da época (até então)</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-medal"></i></div>
+                    <h4>7 títulos</h4>
+                    <p>ao lado de Schumacher, recordista</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-flag"></i></div>
+                    <h4>1° piloto negro</h4>
+                    <p>a vencer e ser campeão na F1</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h4>Mission 44</h4>
+                    <p>fundação para inclusão de jovens</p>
+                </div>
+            </div>
+
+            <!-- números rápidos -->
+            <div class="numbers-grid">
+                <div><span class="big">17</span> <span class="small">temporadas</span></div>
+                <div><span class="big">302</span> <span class="small">GPs largados</span></div>
+                <div><span class="big">153</span> <span class="small">voltas na liderança</span></div>
+                <div><span class="big">1</span> <span class="small">único e lendário</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEGADO + ATIVISMO -->
+    <section class="legacy">
+        <div class="container">
+            <h2 class="section-title"><span>Fora das pistas</span> (ainda mais rápido)</h2>
+            <div class="legacy-grid">
+                <div class="legacy-item">
+                    <i class="fas fa-tree"></i>
+                    <h4>Ambientalista</h4>
+                    <p>Vegano desde 2017, investe em alimentação vegetal e combate ao plástico. Criou a Neat Burger rede de fast food 100% vegetal.</p>
+                </div>
+                <div class="legacy-item">
+                    <i class="fas fa-fist-raised"></i>
+                    <h4>Igualdade racial</h4>
+                    <p>Criou a comissão Hamilton e a Mission 44 para aumentar a diversidade no automobilismo e apoiar crianças negras na educação.</p>
+                </div>
+                <div class="legacy-item">
+                    <i class="fas fa-headphones-alt"></i>
+                    <h4>Música & Moda</h4>
+                    <p>Assina coleções com a Tommy Hilfiger, produz música como XNDA e é presença constante na cena cultural global.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE EXPRESS -->
+    <section class="timeline">
+        <div class="container">
+            <h2 class="section-title"><span>Momentos</span> decisivos</h2>
+            <div class="timeline-item">
+                <div class="year">2007</div>
+                <div class="timeline-content">
+                    <h5>Estreia estelar</h5>
+                    <p>Pódio nas 9 primeiras corridas, quase campeão no ano de estreia.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2008</div>
+                <div class="timeline-content">
+                    <h5>Primeiro título</h5>
+                    <p>Ultrapassagem épica na última curva em Interlagos.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2013</div>
+                <div class="timeline-content">
+                    <h5>Chegada à Mercedes</h5>
+                    <p>Início da parceria que dominaria a era híbrida.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2020</div>
+                <div class="timeline-content">
+                    <h5>7º título + recorde de vitórias</h5>
+                    <p>Supera Schumacher em vitórias e iguala número de títulos.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2021</div>
+                <div class="timeline-content">
+                    <h5>Sir Lewis Hamilton</h5>
+                    <p>Recebe o título de cavaleiro da rainha Elizabeth II.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION (simulação) -->
+    <section class="cta">
+        <div class="container">
+            <h3>Acompanhe a lenda</h3>
+            <p>Fique por dentro da carreira, ativismo e projetos de Lewis Hamilton.</p>
+            <a href="#" class="button"><i class="fab fa-instagram"></i> Siga @lewishamilton</a>
+        </div>
+    </section>
+
+    <!-- FOOTER com redes sociais fictícias -->
+    <footer>
+        <div class="container">
+            <div class="social">
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p style="margin-top: 1.5rem;">© 2025 • Landing Page inspirada em Sir Lewis Hamilton • Todos os direitos reservados</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Projeto fictício sem fins comerciais — fã page homenagem</p>
+        </div>
+    </footer>
+</body>
+</html>
